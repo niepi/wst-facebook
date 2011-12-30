@@ -17,13 +17,9 @@
  * Configure your Facebook data
  */
 $fb = array();
-$fb['needed'] = false; //If false the Facebook API is not initialized - useful for development
-$fb['api_key'] = '';
-$fb['secret'] = '';
-$fb['user_login'] = true;
-$fb['app_url'] = ''; // facebook app name
-$fb['base_url'] = ''; // url of your wst-facebook app
-
+$fb['needed'] = true; //If false the Facebook API is not initialized - useful for development
+$fb['appid'] = '340863595924270';
+$fb['secret'] = '22aa6163ea2bda6d074582900f2e2dd1';
 
 /**
  * Configure your database connection. 
@@ -58,7 +54,7 @@ $facebookapp =  new FacebookApp();
 
 //Initialize Facebook API if needed.
 if($fb['needed'] == true){
-	$facebookapp->initFacebook($fb['api_key'], $fb['secret'], $fb['user_login'], $fb['base_url'],$fb['app_url']);
+	$facebookapp->initFacebook($fb['appid'], $fb['secret']);
 }
 
 //Set up databae connection if needed.

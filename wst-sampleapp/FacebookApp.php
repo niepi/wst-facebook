@@ -13,7 +13,7 @@
  * @license    http://creativecommons.org/licenses/LGPL/2.1/
  */
 
-require_once '../WST/Facebook.php';
+require_once '../WST/facebook.php';
 
 class FacebookApp extends WST_Facebook{
 

@@ -1,8 +1,36 @@
-<h1>WST-Facebook SampleApp</h1>
-
-<p>
-	Hello <fb:name uid="<?php echo $this->fbuserid ?>" />, thanks for checking out the WST-Facebook SampleApp. You can findout more at <a href="http://wirsindthomas.com/wst-facebook/">wirsindthomas.com/wst-facebook</a>.
-</p>
-<p>
-	For demonstration purposes, this is how you echo parameters which have been passed to the view object: <strong><?php echo $this->example_value ?></strong>
-</p>
+<!DOCTYPE html>
+<html xmlns:fb="http://www.facebook.com/2008/fbml">
+  <body>
+    <?php if ($this->user) { ?>
+      Your user profile is
+      <pre>
+        <?php print htmlspecialchars(print_r($this->user_profile, true)) ?>
+      </pre>
+    <?php } else { ?>
+      <fb:login-button></fb:login-button>
+    <?php } ?>
+    <div id="fb-root"></div>
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId: '<?php echo $this->facebook->getAppID() ?>',
+          cookie: true,
+          xfbml: true,
+          oauth: true
+        });
+        FB.Event.subscribe('auth.login', function(response) {
+          window.location.reload();
+        });
+        FB.Event.subscribe('auth.logout', function(response) {
+          window.location.reload();
+        });
+      };
+      (function() {
+        var e = document.createElement('script'); e.async = true;
+        e.src = document.location.protocol +
+          '//connect.facebook.net/en_US/all.js';
+        document.getElementById('fb-root').appendChild(e);
+      }());
+    </script>
+  </body>
+</html>
