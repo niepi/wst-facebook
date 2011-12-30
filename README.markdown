@@ -6,9 +6,8 @@ while still being easy to modify.
 
 Dependencies
 ------------
-- [Smarty](http://www.smarty.net/)
 - [adodb](http://adodb.sourceforge.net/)
-- [Facebook PHP Client Library](http://wiki.developers.facebook.com/index.php/PHP)
+- [Facebook PHP SDK](https://github.com/facebook/php-sdk)
 
 Documentation
 =============
@@ -20,10 +19,9 @@ File Structur
 	* index.php - handels all incomming requests
 	* FacebookApp.php - contains the logic of your Facebook app
 	* views - contains the views for ever Action Methods
-		* c - compiled smarty views (must be writeable by your Webserver)
 	* logs - if logging is enabled it contains the logfile (must be writeable by your Webserver)
 * __WST__ - contains the WST-Facebook Framework class
-* **lib** - contains all external libraries (Adodb, Smarty,facebook API)
+* **lib** - contains all external libraries (Adodb, facebook PHP SDK)
 
 
 sampleApp Setup
@@ -39,9 +37,6 @@ There is no external config file as there is not much configuration needed. All 
 Basically you only need to insert the API key and the secret of your Facebook application. 
 As it is very useful to sometimes switch of the Facebook proxying for development purposes you can do so by 
 setting ``$fb['needed']`` to ``false``.
-
-If your application requires the user to be logged in (i.e. for throwing stuff into his datastore) just enable ``$fb['user_login']``.
-
 
 #### Configure your database connection
 The configuration of a database connection is completely up to you. In case you need it, enable ``$db['needed']``.
@@ -59,12 +54,10 @@ This class can be seen as the controller component of your application.
 For each action you have to set up a public method which ends with ``...Action()``, so that an action called ``ìndex`` would be defined 
 through a method called ``indexAction()``.
 
-Within the action you are free to do whatever has to be done to generate the output. You can assign variables for being used within the Smarty template by
-calling ``$this->view->assign("key", "value")``.
+Within the action you are free to do whatever has to be done to generate the output. You can assign variables for being used within the template by
+calling ``$this->view->variable = $variable``.
 
-Each action must - or at least is intended to - end with calling ``$this->render()``. This triggers Smarty to generate the template and display it. 
-By convention wst-facebook expects templates to reside in ``/path/to/your/app/views/``, ending with ``*.tpl`` and reflecting the name of the current action.
-So if your action is called ``index`` there has to be a template called ``index.tpl`` in the views folder.
+Each action must - or at least is intended to - end with calling ``$this->render()``. By convention wst-facebook expects templates to reside in ``/path/to/your/app/views/``, ending with ``*.phtml`` and reflecting the name of the current action. So if your action is called ``index`` there has to be a template called ``index.phtml`` in the views folder.
 
 By default all templates are cached in ``/path/to/your/app/views/c``. 
 
