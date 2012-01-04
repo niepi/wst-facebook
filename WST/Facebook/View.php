@@ -14,6 +14,7 @@
  */
 class WST_Facebook_View
 {
+    private $_layout_dir = 'layouts';
 	private $_template_dir = 'views';
 	private $_template_ext = 'phtml';
 
@@ -38,11 +39,14 @@ class WST_Facebook_View
 	
 	public function render($action)
 	{	
-		$template_file = $this->_template_dir . '/' . $action.'.'.$this->_template_ext;
+        
+        $layout = isset($this->layout) ? $this->layout : 'default';
+		$template_file = $this->_template_dir . '/' . $action . '.'.$this->_template_ext;
+		$layout_file = $this->_layout_dir . '/' . $layout . '.'.$this->_template_ext;        
 		if(!file_exists($template_file)){
 			throw new WST_Facebook_Exception("Template File does not exist.");
 		}
 		
-		include $template_file;
+		include $layout_file;
 	}
 }
