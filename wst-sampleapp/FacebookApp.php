@@ -14,8 +14,13 @@
  */
 
 require_once '../WST/facebook.php';
+require_once '../lib/spyc-0.5/spyc.php';
 
 class FacebookApp extends WST_Facebook{
+
+
+	protected $content;
+
 
 	/**
 	 * Default function that is called before any action
@@ -24,6 +29,12 @@ class FacebookApp extends WST_Facebook{
 	 * @author Alexander Thomas
 	 */
 	function init(){
+
+
+		$this->content = Spyc::YAMLLoad('content.yaml');
+
+		echo "<pre>";
+		var_dump($this->content['questions']);
 	}
 
 	/**
@@ -38,6 +49,13 @@ class FacebookApp extends WST_Facebook{
 		
 		//render() triggers template rendering process for this action
 		$this->render();
+	}
+
+	function quizAction(){
+        //$quiz = require_once('quiz.php');
+        $this->view->quiz = require('content.php');        
+        // $this->view->quiz = $quiz;
+        $this->render();
 	}
 
 }

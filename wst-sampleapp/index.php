@@ -17,7 +17,7 @@
  * Configure your Facebook data
  */
 $fb = array();
-$fb['needed'] = true; //If false the Facebook API is not initialized - useful for development
+$fb['needed'] = false; //If false the Facebook API is not initialized - useful for development
 $fb['appid'] = '340863595924270';
 $fb['secret'] = '22aa6163ea2bda6d074582900f2e2dd1';
 

@@ -57,24 +57,31 @@ abstract class WST_Facebook {
     final public function initFacebook($appid, $secret){
 
         $this->facebook = new Facebook(array(
-          'appId'  => $appid,
-          'secret' => $secret,
+        'appId'  => $appid,
+        'secret' => $secret,
+        'cookie' => true, // enable optional cookie support            
         ));
-
         $this->view->facebook = $this->facebook;        
-            
+
         $this->user = $this->facebook->getUser();
         $this->view->user = $this->user;
+
+            
+        if (!$this->user) {
+            $this->view->loginUrl   = "https://www.facebook.com/dialog/oauth?client_id=" . $appId . "&redirect_uri=https://apps.facebook.com/niepitest";
+        }            
         
-        if ($this->user) {
+        else{
             try {
                 // Proceed knowing you have a logged in user who's authenticated.
-                $this->user_profile = $this->facebook->api('/me');
-                $this->view->user_profile = $this->facebook->api('/me');                
+                // $this->user_profile = $this->facebook->api('/me');
+                // $this->view->user_profile = $this->user_profile;
+                
             } catch (FacebookApiException $e) {
                 echo '<pre>'.htmlspecialchars(print_r($e, true)).'</pre>';
                 $this->user = null;
             }
+        
         }
     }
 

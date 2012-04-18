@@ -23,7 +23,7 @@
 
   <!-- CSS: implied media=all -->
   <!-- CSS concatenated and minified via ant build script-->
-  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="css/style.css">
   <!-- end CSS-->
 
   <!-- More ideas for your <head> here: h5bp.com/d/head-Tips -->
@@ -31,46 +31,44 @@
   <!-- All JavaScript at the bottom, except for Modernizr / Respond.
        Modernizr enables HTML5 elements & feature detects; Respond is a polyfill for min/max-width CSS3 Media Queries
        For optimal performance, use a custom Modernizr build: www.modernizr.com/download/ -->
-  <script src="../js/libs/modernizr-2.0.6.min.js"></script>
+  <script src="js/libs/modernizr-2.0.6.min.js"></script>
 </head>
 
 <body>
-    <?php if($this->facebook):?>
+        
+    <?php if(isset($this->loginUrl)):?>
+        <script>top.location.href = "<?php echo $this->loginUrl?>";</script>
+    <?php else:?>
         <div id="fb-root"></div>
         <script>
           window.fbAsyncInit = function() {
             FB.init({
-              appId: '<?php echo $this->facebook->getAppID() ?>',
-              cookie: true,
-              xfbml: true,
-              oauth: true
-            });
-            FB.Event.subscribe('auth.login', function(response) {
-              window.location.reload();
-            });
-            FB.Event.subscribe('auth.logout', function(response) {
-              window.location.reload();
+              appId      : '340863595924270', // App ID
+              channelUrl : '//fb.niepi.org/wst-sampleapp/channel.html', // Channel File
+              status     : true, // check login status
+              cookie     : true, // enable cookies to allow the server to access the session
+              xfbml      : true  // parse XFBML
             });
           };
-          (function() {
-            var e = document.createElement('script'); e.async = true;
-            e.src = document.location.protocol +
-              '//connect.facebook.net/en_US/all.js';
-            document.getElementById('fb-root').appendChild(e);
-          }());
+          // Load the SDK Asynchronously
+          (function(d){
+             var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+             js = d.createElement('script'); js.id = id; js.async = true;
+             js.src = "//connect.facebook.net/en_US/all.js";
+             d.getElementsByTagName('head')[0].appendChild(js);
+           }(document));
         </script>
     <?php endif;?>
   <div id="container">
       <?php include $template_file;?>
   </div> <!--! end of #container -->
 
-
   <!-- JavaScript at the bottom for fast page loading -->
 
   <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
   <script>window.jQuery || document.write('<script src="../js/libs/jquery-1.6.2.min.js"><\/script>')</script>
-
+  <script src="js/fb.js"></script>
 	
   <!-- Change UA-XXXXX-X to be your site's ID -->
   <script>
