@@ -5,7 +5,12 @@ questions:
 		answers:
 			1:
 				answer:	"antwort 1:1"
-				value:	"50"
+				value:	
+					a:"50"
+					b:"50"
+					c:"50"
+					d:"50"
+					e:"50"
 			2:
 				answer:	"antwort 1:2"
 				value:	"50"
@@ -67,4 +72,10 @@ results:
 			value:	"1200"			
 			assests:
 				coverImage1 : "image123.jpg"
-				coverImage2 : "image1232.jpg"			
+				coverImage2 : "image1232.jpg"	
+
+# lalalalalal
+content:
+		"headline": "hallo"		
+assests:
+		image1232: "image.jpg"

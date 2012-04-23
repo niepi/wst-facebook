@@ -33,8 +33,8 @@ class FacebookApp extends WST_Facebook{
 
 		$this->content = Spyc::YAMLLoad('content.yaml');
 
-		echo "<pre>";
-		var_dump($this->content['questions']);
+		// echo "<pre>";
+		// var_dump($this->content['questions']);
 	}
 
 	/**
